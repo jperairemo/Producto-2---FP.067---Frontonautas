@@ -1,11 +1,11 @@
 /* Tamaño grande para el avatar del detalle */
 .detail-avatar {
-  width: 120px;          /* ajusta a tu gusto: 96, 110, 120… */
+  width: 120px;          
   height: 120px;
   font-size: 2rem;       /* tamaño del icono si no hay foto */
 }
 
-/* Un poco más de separación entre foto y textos (opcional) */
+/* Separación entre foto y textos  */
 .info-row {
   gap: 1.25rem;          /* 20px aprox */
 }
@@ -43,7 +43,7 @@
   color: #fff;
 }
 .btn-brand:hover{
-  background: #cf6219;        /* un tono más oscuro al pasar */
+  background: #cf6219;        /* tono más oscuro al pasar */
   border-color: #c9611b;
   color: #fff;
 }

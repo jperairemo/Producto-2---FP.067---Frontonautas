@@ -12,7 +12,7 @@ import { Player } from '../../models/player.model';
 export class DetailComponent {
   @Input() player: Player | null = null;
 
-  // 👉 nuevo: evento para cerrar el detalle
+  // nuevo: evento para cerrar el detalle
   @Output() closed = new EventEmitter<void>();
 
   // Fallback de avatar
@@ -21,7 +21,7 @@ export class DetailComponent {
     (e.target as HTMLImageElement).src = this.defaultAvatar;
   }
 
-  // 👉 nuevo: método que dispara el cierre
+  // nuevo: método que dispara el cierre
   close() {
     this.closed.emit();
   }

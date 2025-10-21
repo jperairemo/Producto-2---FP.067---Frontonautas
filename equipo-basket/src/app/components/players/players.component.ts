@@ -21,14 +21,14 @@ import { PlayersFilterPipe } from '../../pipes/players-filter.pipe';
   styleUrl: './players.component.css',
 })
 export class PlayersComponent implements OnInit, OnChanges {
-  // ---- Inputs que está pasando AppComponent ----
+  // Inputs que está pasando AppComponent 
   @Input() players: Player[] = [];
   @Input() activeId: number | null = null;
 
-  // ---- Output para notificar selección al padre ----
+  // Output para notificar selección al padre 
   @Output() selected = new EventEmitter<Player>();
 
-  // ---- Filtros ----
+  // Filtros 
   search = '';
   pos = '';
   positions: string[] = [];
@@ -47,7 +47,7 @@ export class PlayersComponent implements OnInit, OnChanges {
       : [];
   }
 
-  // Método que espera tu template (click)="select(p)"
+  // Método que espera template (click)="select(p)"
   select(p: Player): void {
     this.selected.emit(p);
   }

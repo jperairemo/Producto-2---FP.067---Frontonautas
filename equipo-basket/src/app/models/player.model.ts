@@ -6,6 +6,6 @@ export interface Player {
   age: number;
   height: number; // en metros
   avatar?: string; // ruta en /assets
-  videoUrl?: string; // url youtube/vimeo o local
+  videoUrl?: string; // local
   mediaTitle?: string;
 }
