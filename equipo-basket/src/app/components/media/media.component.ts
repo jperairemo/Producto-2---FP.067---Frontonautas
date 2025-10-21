@@ -1,4 +1,4 @@
-// src/app/media/media.component.ts
+
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Player } from '../../models/player.model';
@@ -43,7 +43,7 @@ export class MediaComponent {
 
   constructor(private sanitizer: DomSanitizer) {}
 
-//  Play/Pause usando el <video> nativo (sin reasignar la URL)
+//  Play/Pause usando el <video> nativo
   toggle() {
     const el = this.videoEl?.nativeElement;
     if (!this.playUrlSafe || !el) return;
@@ -57,11 +57,7 @@ export class MediaComponent {
         .catch(() => (this.playing = false)); // por si el navegador bloquea
     }
   }
-  // TODO
-  // stop() {
-  //   this.playing = false;
-  //   this.playUrlSafe = null; // quitar iframe = detener
-  // }
+  
 
   // NUEVA FUNCION STOP
   stop() {
@@ -72,9 +68,7 @@ export class MediaComponent {
     }
     this.playing = false;
 
-    // Si prefieres OCULTAR el reproductor al hacer stop, deja esta línea.
-    // Si quieres mantener el video visible, comenta la línea de abajo.
-    // this.playUrlSafe = null;
+  
   }
 
   onNativePlay() {
