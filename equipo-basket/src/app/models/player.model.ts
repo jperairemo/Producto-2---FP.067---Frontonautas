@@ -1,5 +1,5 @@
 export interface Player {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   position: 'Base' | 'Escolta' | 'Alero' | 'Ala-Pívot' | 'Pívot' | string;

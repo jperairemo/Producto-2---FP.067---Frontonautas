@@ -64,7 +64,7 @@
   <ul class="list-group list-group-flush">
     <li *ngFor="let p of players | playersFilter: search : pos"
         class="list-group-item d-flex gap-3 align-items-start player-item"
-        [class.active]="p.id === activeId"
+        [class.active]="p.id === activeId?.toString()"
         (click)="select(p)">
       <div class="avatar">
         <img *ngIf="p.avatar" [src]="p.avatar" [alt]="'Foto de ' + p.firstName" 

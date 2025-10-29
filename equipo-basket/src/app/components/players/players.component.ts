@@ -14,17 +14,17 @@ import { PlayersService } from '../../services/players.service';
 })
 export class PlayersComponent implements OnInit, OnChanges {
   @Input() players: Player[] = [];
-  @Input() activeId: number | null = null;
+  @Input() activeId: string | null = null;
   @Output() selected = new EventEmitter<Player>();
 
   search = '';
   pos = '';
-  positions: string[] = ['Base', 'Escolta', 'Alero', 'Ala-Pívot', 'Pívot']; // 🔹 definidas
+  positions: string[] = ['Base', 'Escolta', 'Alero', 'Ala-Pívot', 'Pívot'];
   avatars: string[] = ['chico1.png', 'chico2.png', 'chico3.png', 'chico4.png', 'chico5.png'];
   videos: string[] = ['video1', 'video2', 'video3', 'video4', 'video5'];
 
   nuevoJugador: Player = {
-    id: 0,
+    id: '',
     firstName: '',
     lastName: '',
     position: '',
@@ -57,12 +57,12 @@ export class PlayersComponent implements OnInit, OnChanges {
   }
 
   addPlayer() {
-    const jugador = { ...this.nuevoJugador, id: Date.now() };
+  const jugador = { ...this.nuevoJugador, id: Date.now().toString() };
     this.playersService.addPlayer(jugador)
       .then(() => {
-        console.log('✅ Jugador añadido:', jugador);
+        console.log('Jugador añadido:', jugador);
         this.nuevoJugador = {
-          id: 0,
+          id: '',
           firstName: '',
           lastName: '',
           position: '',
@@ -73,6 +73,6 @@ export class PlayersComponent implements OnInit, OnChanges {
           mediaTitle: ''
         };
       })
-      .catch(err => console.error('❌ Error al añadir jugador:', err));
+      .catch(err => console.error('Error al añadir jugador:', err));
   }
 }
