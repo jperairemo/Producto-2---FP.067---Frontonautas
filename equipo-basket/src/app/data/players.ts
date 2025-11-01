@@ -2,7 +2,7 @@ import { Player } from '../models/player.model';
 
 export const PLAYERS: Player[] = [
   {
-    id: 1,
+    id: '1',
     firstName: 'Juan',
     lastName: 'Pérez',
     position: 'Base',
@@ -13,7 +13,7 @@ export const PLAYERS: Player[] = [
     mediaTitle: 'Resumen del jugador',
   },
   {
-    id: 2,
+    id: '2',
     firstName: 'Luis',
     lastName: 'García',
     position: 'Escolta',
@@ -24,7 +24,7 @@ export const PLAYERS: Player[] = [
     mediaTitle: 'Resumen del jugador',
   },
   {
-    id: 3,
+    id: '3',
     firstName: 'Carlos',
     lastName: 'Ruiz',
     position: 'Alero',
@@ -35,7 +35,7 @@ export const PLAYERS: Player[] = [
     mediaTitle: 'Resumen del jugador',
   },
   {
-    id: 4,
+    id: '4',
     firstName: 'Pedro',
     lastName: 'López',
     position: 'Ala-Pívot',
@@ -46,7 +46,7 @@ export const PLAYERS: Player[] = [
     mediaTitle: 'Resumen del jugador',
   },
   {
-    id: 5,
+    id: '5',
     firstName: 'Diego',
     lastName: 'Santos',
     position: 'Pívot',
