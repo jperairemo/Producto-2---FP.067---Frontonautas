@@ -62,19 +62,35 @@
 
   <!-- Listado -->
   <ul class="list-group list-group-flush">
-    <li *ngFor="let p of players | playersFilter: search : pos"
-        class="list-group-item d-flex gap-3 align-items-start player-item"
-        [class.active]="p.id === activeId?.toString()"
-        (click)="select(p)">
+    <li
+      *ngFor="let p of players | playersFilter: search : pos"
+      class="list-group-item d-flex gap-3 align-items-start player-item"
+      [class.active]="p.id === activeId?.toString()"
+      (click)="select(p)"
+    >
       <div class="avatar">
-        <img *ngIf="p.avatar" [src]="p.avatar" [alt]="'Foto de ' + p.firstName" 
-             style="width:50px;height:50px;border-radius:50%;object-fit:cover">
+        <img
+          *ngIf="p.avatar"
+          [src]="p.avatar"
+          [alt]="'Foto de ' + p.firstName"
+          style="width:50px;height:50px;border-radius:50%;object-fit:cover"
+        />
         <i class="bi bi-person" *ngIf="!p.avatar"></i>
       </div>
-      <div>
+      <div class="flex-grow-1">
         <div class="fw-semibold small">{{ p.firstName }} {{ p.lastName }}</div>
         <div class="muted">{{ p.position }}</div>
       </div>
+
+      <!-- BOTÓN ELIMINAR -->
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm"
+        title="Borrar jugador"
+        (click)="deletePlayer(p, $event)"
+      >
+        <i class="bi bi-trash"></i>
+      </button>
     </li>
   </ul>
 </div>
