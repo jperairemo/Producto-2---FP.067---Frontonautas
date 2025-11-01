@@ -6,8 +6,8 @@
     <h5 class="mb-0">{{ p.firstName }} {{ p.lastName }}</h5>
 
     <div class="d-flex gap-2">
-      <!-- Botón Editar (solo si no estamos editando) -->
-      <button *ngIf="!editMode" class="btn btn-sm btn-outline-primary" (click)="enableEdit()">
+      <!-- Botón Editar -->
+      <button *ngIf="!editMode" class="btn btn-sm btn-edit-filled" (click)="enableEdit()">
         <i class="bi bi-pencil"></i> Editar
       </button>
 

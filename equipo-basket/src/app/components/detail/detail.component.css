@@ -1,59 +1,67 @@
-/* Tamaño grande para el avatar del detalle */
+/* Avatar grande del detalle */
 .detail-avatar {
-  width: 120px;          
+  width: 120px;
   height: 120px;
-  font-size: 2rem;       /* tamaño del icono si no hay foto */
+  font-size: 2rem; /* tamaño del icono si no hay foto */
 }
 
-/* Separación entre foto y textos  */
+/* Separación entre foto y textos */
 .info-row {
-  gap: 1.25rem;          /* 20px aprox */
+  gap: 1.25rem; /* 20px aprox */
 }
 
-/* Línea naranja arriba del bloque Media */
-.media-section::before{
+/* Línea naranja antes de la sección Media */
+.media-section::before {
   content: "";
   display: block;
-  height: 2px;                          /* grosor de la línea */
-  background: var(--brand, #e07a2f);    /* naranja de la app */
-  border-radius: 999px;                 /* puntas redondeadas */
-  width: calc(100% - 2rem);             /* deja margen a ambos lados */
-  margin: 0  auto 1rem;                 /* centrada y con separación abajo */
-  opacity: 1;                           /* evita el 0.25 de <hr> */
-}
-
-.detail-avatar { width: 120px; height: 120px; font-size: 2rem; }
-.info-row { gap: 1.25rem; }
-
-/* Línea naranja antes de Media, sin llegar a los bordes */
-.media-section::before{
-  content: "";
-  display: block;
-  height: 6px;
-  background: #e07a2f;
+  background: #e07a2f;     /* naranja de la app */
+  height: 6px;             /* un poco más gruesa para que se vea */
   border-radius: 999px;
-  width: calc(100% - 2rem);
+  width: calc(100% - 2rem); /* deja márgenes a los lados */
   margin: 0 auto 1rem;
 }
 
-/* Botón naranja de marca */
-.btn-brand{
+/* Botón naranja de marca (Cerrar) */
+.btn-brand {
   background: #e07a2f;        /* naranja fuerte */
   border-color: #e07a2f;
   color: #fff;
+  border-radius: 6px;
+  padding: 4px 10px;
 }
-.btn-brand:hover{
-  background: #cf6219;        /* tono más oscuro al pasar */
+.btn-brand:hover {
+  background: #cf6219;
   border-color: #c9611b;
   color: #fff;
 }
-.btn-brand:active{
+.btn-brand:active {
   background: #b85619;
   border-color: #b85619;
   color: #fff;
 }
-.btn-brand:focus{
+.btn-brand:focus {
   box-shadow: 0 0 0 .2rem rgba(224,122,47,.35);
   color: #fff;
 }
 
+/* Botón EDITAR con mismo estilo pero más claro */
+.btn-edit-filled {
+  background: #f5b041;     /* naranja más suave */
+  border-color: #f5b041;
+  color: #fff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  transition: background-color 0.15s ease-in-out;
+}
+.btn-edit-filled:hover {
+  background: #e59819;     /* un poco más oscuro al pasar */
+  border-color: #e59819;
+  color: #fff;
+}
+
+/* Iconos alineados dentro de los botones */
+.btn-brand i,
+.btn-edit-filled i {
+  margin-right: 4px;
+  vertical-align: middle;
+}
