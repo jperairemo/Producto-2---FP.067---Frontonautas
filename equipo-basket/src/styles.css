@@ -91,12 +91,26 @@ h5{ font-size: 1.5rem; }
   .filters-bar .ms-md-auto { width: 100%; display: flex; justify-content: flex-end; }
 }
 
-/* Opcional: estiliza la banda de filtros (suave) */
+/* Estiliza la banda de filtros */
 .filters-bar {
   background: #f7ede6;        /* tono cálido suave */
   border-radius: 12px;
   padding: 12px;
 }
 
+/* Hace que la lista scrollee dentro del panel */
+.pane-scroll {
+  overflow-y: auto;
+  max-height: calc(100vh - 280px); /* ajusta según el alto de navbar y filtros */
+  padding-right: 6px;
+}
 
+/* Evita que el scrollbar mueva el contenido */
+.pane-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.pane-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.15);
+  border-radius: 3px;
+}
 
