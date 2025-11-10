@@ -43,15 +43,6 @@
     <!-- Media -->
     <div class="col-12 media-section mt-4">
       <ng-content></ng-content>
-
-      <!-- Si tiene vídeo -->
-      <div *ngIf="p.videoUrl" class="mt-3">
-        <h6>🎥 Vídeo:</h6>
-        <video width="320" height="240" controls>
-          <source [src]="p.videoUrl" type="video/mp4">
-          Tu navegador no soporta la reproducción de vídeo.
-        </video>
-      </div>
     </div>
   </ng-container>
 
