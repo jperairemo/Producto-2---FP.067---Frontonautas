@@ -1,11 +1,170 @@
 <div class="card app-card p-3 h-100">
+
   <div class="d-flex align-items-center mb-3 gap-2">
     <i class="bi bi-people fs-5"></i>
     <h5 class="mb-0">Jugadores</h5>
   </div>
 
+
+
+
+
+
   <!-- Filtros -->
-  <div class="mb-2">
+
+<!-- Barra de filtros -->
+<div class="filters-bar d-flex flex-wrap align-items-center gap-2 mb-3">
+
+  <!-- Buscador -->
+  <div class="flex-grow-1 minw-260">
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input
+        [(ngModel)]="search"
+        type="text"
+        class="form-control"
+        aria-label="Buscar por nombre o edad"
+      />
+    </div>
+  </div>
+
+  <!-- Select posición -->
+  <div class="select-wrap">
+    <select
+      [(ngModel)]="pos"
+      class="form-select"
+      aria-label="Filtrar por posición"
+    >
+      <option value="">Todas las posiciones</option>
+      <option *ngFor="let p of positions" [value]="p">{{ p }}</option>
+    </select>
+  </div>
+
+  <!-- Botón Nuevo -->
+  <div class="ms-md-auto">
+    <button
+      type="button"
+      class="btn bg-main"
+      data-bs-toggle="modal"
+      data-bs-target="#modalJugador"
+    >
+      <i class="bi bi-person-plus"></i> Nuevo jugador
+    </button>
+  </div>
+</div>
+
+
+
+<!-- MODAL NUEVO JUGADOR -->
+<div
+  class="modal fade"
+  id="modalJugador"
+  tabindex="-1"
+  aria-labelledby="modalJugadorLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white bg-main">
+        <h5 class="modal-title" id="modalJugadorLabel">
+          <i class="bi bi-person-plus"></i>
+          Añadir nuevo jugador
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <form (ngSubmit)="addPlayer()" #formJugador="ngForm" class="p-2">
+          <div class="row g-3">
+
+            <!-- Nombre -->
+            <div class="col-md-6">
+              <label for="firstName" class="form-label">Nombre</label>
+              <input
+                id="firstName"
+                type="text"
+                [(ngModel)]="nuevoJugador.firstName"
+                name="firstName"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <!-- Apellidos -->
+            <div class="col-md-6">
+              <label for="lastName" class="form-label">Apellidos</label>
+              <input
+                id="lastName"
+                type="text"
+                [(ngModel)]="nuevoJugador.lastName"
+                name="lastName"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <!-- Posición -->
+            <div class="col-md-6">
+              <label for="position" class="form-label">Posición</label>
+              <select
+                id="position"
+                [(ngModel)]="nuevoJugador.position"
+                name="position"
+                class="form-select"
+                required
+              >
+                <option value="">Selecciona una posición</option>
+                <option *ngFor="let pos of positions" [value]="pos">{{ pos }}</option>
+              </select>
+            </div>
+
+            <!-- Edad -->
+            <div class="col-md-3">
+              <label for="age" class="form-label">Edad</label>
+              <input
+                id="age"
+                type="number"
+                [(ngModel)]="nuevoJugador.age"
+                name="age"
+                class="form-control"
+              />
+            </div>
+
+            <!-- Altura -->
+            <div class="col-md-3">
+              <label for="height" class="form-label">Altura (m)</label>
+              <input
+                id="height"
+                type="number"
+                step="0.01"
+                [(ngModel)]="nuevoJugador.height"
+                name="height"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="text-end mt-4">
+            <button
+              type="submit"
+              class="btn btn-outline-primary"
+              [disabled]="!formJugador.form.valid"
+              data-bs-dismiss="modal"
+            >
+              <i class="bi bi-floppy"></i> Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <!-- <div class="mb-2">
     <div class="input-group">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input
@@ -26,14 +185,10 @@
       <option value="">Todas las posiciones</option>
       <option *ngFor="let p of positions" [value]="p">{{ p }}</option>
     </select>
-  </div>
+  </div> -->
 
   <!-- Formulario -->
-  <form
-    (ngSubmit)="addPlayer()"
-    #formJugador="ngForm"
-    class="mb-3 border rounded p-3 bg-light"
-  >
+  <!-- <form (ngSubmit)="addPlayer()" #formJugador="ngForm" class="mb-3 border rounded p-3 bg-light">
     <h6 class="mb-2">Añadir nuevo jugador</h6>
     <div class="row g-2">
       <!-- Nombre y Apellidos -->
@@ -135,14 +290,15 @@
         <i class="bi bi-plus-circle"></i> Añadir jugador
       </button>
     </div>
-  </form>
+  </form> -->
 
   <!-- Listado -->
-  <ul class="list-group list-group-flush">
+  <!-- <ul class="list-group list-group-flush">
     <li
-      *ngFor="let p of players | playersFilter: search : pos"
+      *ngFor="let p of players | playersFilter: search : pos; let i = index"
       class="list-group-item d-flex gap-3 align-items-start player-item"
       [class.active]="p.id === activeId?.toString()"
+      [ngClass]="{ 'bg-light': i % 2 === 0, 'bg-white': i % 2 !== 0 }"
       (click)="select(p)"
     >
       <div class="avatar">
@@ -159,10 +315,10 @@
           {{ p.firstName }} {{ p.lastName }}
         </div>
         <div class="muted">{{ p.position }}</div>
-      </div>
+      </div> -->
 
       <!-- BOTÓN ELIMINAR -->
-      <button
+      <!-- <button
         type="button"
         class="btn btn-outline-danger btn-sm"
         title="Borrar jugador"
@@ -171,5 +327,43 @@
         <i class="bi bi-trash"></i>
       </button>
     </li>
-  </ul>
+  </ul> -->
+
+
+  <div class="pane-scroll mt-3">
+    <!-- Listado -->
+    <ul class="list-group list-group-flush">
+      <li
+        *ngFor="let p of players | playersFilter: search : pos; let i = index"
+        class="list-group-item d-flex gap-3 align-items-start player-item"
+        [class.active]="p.id === activeId?.toString()"
+        [ngClass]="{ 'bg-light': i % 2 === 0, 'bg-white': i % 2 !== 0 }"
+        (click)="select(p)"
+      >
+        <div class="avatar">
+          <img
+            *ngIf="p.avatar"
+            [src]="p.avatar"
+            [alt]="'Foto de ' + p.firstName"
+            style="width:50px;height:50px;border-radius:50%;object-fit:cover"
+          />
+          <i class="bi bi-person" *ngIf="!p.avatar"></i>
+        </div>
+        <div class="flex-grow-1">
+          <div class="fw-semibold small">{{ p.firstName }} {{ p.lastName }}</div>
+          <div class="muted">{{ p.position }}</div>
+        </div>
+
+        <!-- BOTÓN ELIMINAR -->
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm"
+          title="Borrar jugador"
+          (click)="deletePlayer(p, $event)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>

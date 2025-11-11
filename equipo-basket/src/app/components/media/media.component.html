@@ -21,21 +21,18 @@
     >
       <i class="bi bi-stop-fill"></i>
     </button>
+
     <div>
       <div class="fw-semibold">Jugadas destacadas</div>
       <small class="text-white-50">
-        {{
-          playing
-            ? "Reproduciendo… (click para pausar)"
-            : "Click para reproducir"
-        }}
+        {{ playing ? "Reproduciendo… (click para pausar)" : "Click para reproducir" }}
       </small>
     </div>
   </div>
 
-  <!-- Reproductor -->
+  <!-- VIDEO NORMAL (mp4, drive directo, etc) -->
   <div
-    *ngIf="playUrlSafe; else noVideo"
+    *ngIf="playUrlSafe && !((player?.videoUrl || '').includes('youtube.com')); else youtubeBlock"
     class="ratio ratio-16x9 mt-3 rounded-3 overflow-hidden shadow-lg"
   >
     <video
@@ -53,14 +50,29 @@
     </video>
   </div>
 
-  <ng-template #noVideo>
-    <div class="ratio ratio-16x9 mt-3 rounded-3 overflow-hidden shadow-sm bg-body-secondary">
-      <div
-        class="w-100 h-100 d-flex align-items-center justify-content-center gap-2 text-muted"
-      >
-        <i class="bi bi-camera-video-off fs-1"></i>
-        <span>Vídeo no disponible</span>
-      </div>
+  <!-- BLOQUE YOUTUBE -->
+  <ng-template #youtubeBlock>
+    <div
+      *ngIf="playUrlSafe && (player?.videoUrl || '').includes('youtube.com')"
+      class="ratio ratio-16x9 mt-3 rounded-3 overflow-hidden shadow-lg"
+    >
+      <iframe
+        [src]="playUrlSafe"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
     </div>
   </ng-template>
+
+  <!-- SIN VIDEO -->
+  <div
+    *ngIf="!playUrlSafe"
+    class="ratio ratio-16x9 mt-3 rounded-3 overflow-hidden shadow-sm bg-body-secondary"
+  >
+    <div class="w-100 h-100 d-flex align-items-center justify-content-center gap-2 text-muted">
+      <i class="bi bi-camera-video-off fs-1"></i>
+      <span>Vídeo no disponible</span>
+    </div>
+  </div>
 </div>
