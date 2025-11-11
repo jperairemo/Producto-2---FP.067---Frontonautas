@@ -1,4 +1,3 @@
-
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Player } from '../../models/player.model';
@@ -13,27 +12,28 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class MediaComponent {
   private _player: Player | null = null;
 
-  @ViewChild('videoEl') videoEl?: ElementRef<HTMLVideoElement>; // TODO
+  @ViewChild('videoEl') videoEl?: ElementRef<HTMLVideoElement>;
 
   @Input() set player(value: Player | null) {
     // Si cambia de jugador, paramos la reproducción anterior
     if (this._player?.id !== value?.id) {
       this.stop();
-      this.playUrlSafe = null; // Esto hace que se resetee la url
+      this.playUrlSafe = null;
     }
     this._player = value;
 
-    // Si no hay video para el nuevo jugador, salimos
+    // Si no hay video, salimos
     const videoKey = value?.videoUrl;
     if (!videoKey) {
       this.playing = false;
       return;
     }
 
-    // Construir y asignar la nueva URL de reproducción
+    // Convertimos a URL reproducible
     const url = this.buildPlayableUrl(videoKey);
     this.playUrlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
+
   get player(): Player | null {
     return this._player;
   }
@@ -43,7 +43,6 @@ export class MediaComponent {
 
   constructor(private sanitizer: DomSanitizer) {}
 
-//  Play/Pause usando el <video> nativo
   toggle() {
     const el = this.videoEl?.nativeElement;
     if (!this.playUrlSafe || !el) return;
@@ -54,40 +53,59 @@ export class MediaComponent {
     } else {
       el.play()
         .then(() => (this.playing = true))
-        .catch(() => (this.playing = false)); // por si el navegador bloquea
+        .catch(() => (this.playing = false));
     }
   }
-  
 
-  // NUEVA FUNCION STOP
   stop() {
     const el = this.videoEl?.nativeElement;
     if (el) {
       el.pause();
-      el.currentTime = 0; // vuelve al inicio
+      el.currentTime = 0;
     }
     this.playing = false;
-
-  
   }
 
   onNativePlay() {
     this.playing = true;
   }
+
   onNativePause() {
     this.playing = false;
   }
 
-  // Normaliza a /embed/, usa dominio nocookie y añade autoplay
+  /** ✅ Lógica mejorada para reproducir URLs o locales */
   private buildPlayableUrl(url: string): string {
-    const key = url.trim(); // 'video1' | 'video2' | 'video3' o una ruta ya armada
+    const key = url.trim();
 
-    // Si llega una URL completa o una ruta a assets
-    if (/^https?:\/\//i.test(key) || key.startsWith('assets/')) {
+    // ✅ Si ya es una URL completa (YouTube, Drive, etc.)
+    if (/^https?:\/\//i.test(key)) {
+      if (key.includes('youtube.com') || key.includes('youtu.be')) {
+        return this.toYoutubeEmbed(key); // transformar a embed
+      }
+      return key; // archivo directo (.mp4)
+    }
+
+    // ✅ Si es un asset local (ruta relativa)
+    if (key.startsWith('assets/')) {
       return key;
     }
 
-    // Si te llega 'video1'/'video2'/'video3', construimos la ruta en assets
+    // ✅ Si es simplemente "video1" => usar assets
     return `assets/videos/${key}.mp4`;
+  }
+
+  /** ✅ Convierte YouTube a formato EMBED compatible */
+  private toYoutubeEmbed(url: string): string {
+    let videoId = '';
+
+    // Detectamos diferentes formatos:
+    if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('v=')) {
+      videoId = url.split('v=')[1].split('&')[0];
+    }
+
+    return `https://www.youtube.com/embed/${videoId}`;
   }
 }
