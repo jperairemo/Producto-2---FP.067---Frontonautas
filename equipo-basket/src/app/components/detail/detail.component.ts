@@ -58,7 +58,7 @@ export class DetailComponent {
 
     this.playersService.updatePlayer(id, restoDatos)
       .then(() => {
-        console.log('✅ Jugador actualizado correctamente');
+        console.log(' Jugador actualizado correctamente');
         this.player = { ...this.editablePlayer! }; // actualiza la vista
         this.editMode = false;
         this.pendingUpdates = {};
@@ -77,10 +77,10 @@ export class DetailComponent {
       next: (url) => {
         if (fileType === 'image') {
           this.pendingUpdates.imagenUrl = url;
-          alert('✅ Imagen subida correctamente');
+          alert(' Imagen subida correctamente');
         } else {
           this.pendingUpdates.videoUrl = url;
-          alert('✅ Vídeo subido correctamente');
+          alert(' Vídeo subido correctamente');
         }
       },
       error: (err) => alert('❌ Error al subir archivo: ' + err)
