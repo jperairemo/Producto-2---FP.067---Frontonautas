@@ -74,11 +74,11 @@ export class MediaComponent {
     this.playing = false;
   }
 
-  /** ✅ Lógica mejorada para reproducir URLs o locales */
+  /** Lógica mejorada para reproducir URLs o locales */
   private buildPlayableUrl(url: string): string {
     const key = url.trim();
 
-    // ✅ Si ya es una URL completa (YouTube, Drive, etc.)
+    // Si ya es una URL completa (YouTube, Drive, etc.)
     if (/^https?:\/\//i.test(key)) {
       if (key.includes('youtube.com') || key.includes('youtu.be')) {
         return this.toYoutubeEmbed(key); // transformar a embed
@@ -86,16 +86,16 @@ export class MediaComponent {
       return key; // archivo directo (.mp4)
     }
 
-    // ✅ Si es un asset local (ruta relativa)
+    // Si es un asset local (ruta relativa)
     if (key.startsWith('assets/')) {
       return key;
     }
 
-    // ✅ Si es simplemente "video1" => usar assets
+    // Si es simplemente "video1" => usar assets
     return `assets/videos/${key}.mp4`;
   }
 
-  /** ✅ Convierte YouTube a formato EMBED compatible */
+  /** Convierte YouTube a formato EMBED compatible */
   private toYoutubeEmbed(url: string): string {
     let videoId = '';
 

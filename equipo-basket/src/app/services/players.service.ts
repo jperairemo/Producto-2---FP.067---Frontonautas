@@ -22,7 +22,7 @@ export class PlayersService {
 
   constructor() {}
 
-  // 🔹 Obtener jugadores en tiempo real
+  // Obtener jugadores en tiempo real
   getPlayers(): Observable<Player[]> {
     const playersRef: CollectionReference<DocumentData> = collection(this.firestore, 'players');
 
@@ -40,25 +40,25 @@ export class PlayersService {
     });
   }
 
-  // 🔹 Añadir jugador
+  // Añadir jugador
   addPlayer(player: Player) {
     const playersRef = collection(this.firestore, 'players');
     return addDoc(playersRef, player);
   }
 
-  // 🔹 Borrar jugador
+  // Borrar jugador
   deletePlayer(id: string) {
     const docRef = doc(this.firestore, `players/${id}`);
     return deleteDoc(docRef);
   }
 
-  // 🔹 Actualizar jugador
+  // Actualizar jugador
   updatePlayer(id: string, data: Partial<Player>) {
     const docRef = doc(this.firestore, `players/${id}`);
     return updateDoc(docRef, data);
   }
 
-  // 🔹 Subir archivo (imagen o vídeo)
+  // Subir archivo (imagen o vídeo)
   uploadFile(playerId: string, file: File, fileType: 'image' | 'video'): Observable<string> {
     // Ruta donde se almacenará el archivo: players/<id>/<tipo>/<nombreDelArchivo>
     const storageRef = ref(this.storage, `players/${playerId}/${fileType}/${file.name}`);

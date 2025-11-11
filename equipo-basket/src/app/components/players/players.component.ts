@@ -96,7 +96,7 @@ export class PlayersComponent implements OnInit, OnChanges {
       .catch(err => console.error('Error al añadir jugador:', err));
   }
 
-  /** 🔴 aquí es donde engancha el botón de la papelera del HTML */
+  /** aquí es donde engancha el botón de la papelera del HTML */
   deletePlayer(player: Player, event: MouseEvent) {
     // evita que se dispare (click)="select(p)" del <li>
     event.stopPropagation();
