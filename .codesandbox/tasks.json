@@ -1,4 +1,5 @@
 {
+  // These tasks will run in order when initializing your CodeSandbox project.
   "setupTasks": [
     {
       "command": "cd equipo-basket && npm ci",
@@ -6,10 +7,16 @@
     }
   ],
 
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
     "cd equipo-basket && npx ng build && npx http-server ./dist/equipo-basket/browser -p 8080 -s": {
       "name": "cd equipo-basket && npx ng build && npx http-server ./dist/equipo-basket/browser -p 8080 -s",
       "command": "cd equipo-basket && npx ng build && npx http-server ./dist/equipo-basket/browser -p 8080 -s",
+      "runAtStart": true
+    },
+    "cd equipo-basket && npx ng serve --host 0.0.0.0 --port 8080 --disable-host-check": {
+      "name": "cd equipo-basket && npx ng serve --host 0.0.0.0 --port 8080 --disable-host-check",
+      "command": "cd equipo-basket && npx ng serve --host 0.0.0.0 --port 8080 --disable-host-check",
       "runAtStart": true
     }
   }
