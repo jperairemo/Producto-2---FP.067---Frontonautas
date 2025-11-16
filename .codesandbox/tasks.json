@@ -1,15 +1,14 @@
 {
   "setupTasks": [
     {
-      "command": "cd equipo-basket && npm ci",
-      "name": "cd equipo-basket && npm ci"
+      "command": "cd equipo-basket && npm install",
+      "name": "Instalar dependencias"
     }
   ],
-
   "tasks": {
-    "cd equipo-basket && npx ng build && npx http-server ./dist/equipo-basket/browser -p 8080 -s": {
-      "name": "cd equipo-basket && npx ng build && npx http-server ./dist/equipo-basket/browser -p 8080 -s",
-      "command": "cd equipo-basket && npx ng build && npx http-server ./dist/equipo-basket/browser -p 8080 -s",
+    "start-angular": {
+      "name": "Iniciar servidor de desarrollo",
+      "command": "cd equipo-basket && npm start",
       "runAtStart": true
     }
   }
