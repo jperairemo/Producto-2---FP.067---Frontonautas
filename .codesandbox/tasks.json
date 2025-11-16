@@ -2,7 +2,7 @@
   // These tasks will run in order when initializing your CodeSandbox project.
   "setupTasks": [
     {
-      "command": "cd equipo-basket && npm install",
+      "command": "cd equipo-basket && npm ci",
       "name": "Instalar dependencias"
     }
   ],
